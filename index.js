@@ -19,6 +19,7 @@ mongoose
     console.log("DB connection error", err);
   });
 
+  
 const linkSchema = new mongoose.Schema({
   link_id: {
     type: String,
