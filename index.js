@@ -9,7 +9,7 @@ import "mongoose-type-url";
 app.use(express.json());
 
 const port = process.env.PORT || 3000;
-
+console.log(process.env.DB_URL);
 mongoose
   .connect(`${process.env.DB_URL}`)
   .then(() => {
