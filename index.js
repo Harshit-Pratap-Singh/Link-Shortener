@@ -30,6 +30,10 @@ const linkSchema = new mongoose.Schema({
 
 const LinkModel = mongoose.model("LinkModel", linkSchema);
 
+app.get("/", (req, res) => {
+  res.send("<h1>hello there</h1>");
+});
+
 app.get("/:link_id", async (req, res) => {
   //   console.log("asds");
   try {
