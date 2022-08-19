@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "PROD=true node server.js"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
