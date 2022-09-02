@@ -19,7 +19,6 @@ mongoose
     console.log("DB connection error", err);
   });
 
-  
 const linkSchema = new mongoose.Schema({
   link_id: {
     type: String,
@@ -55,7 +54,21 @@ app.post("/v1/shrink", async (req, res) => {
   const body = req.body;
   console.log(body);
   try {
-    const link_id = nanoid(7);
+    let link_id;
+    if (body?.customURL) {
+      link_id = body.customURL;
+      const re = new RegExp("^[a-zA-Z0-9_-]*$");
+      const isPresnt = await LinkModel.find({ link_id: link_id });
+      if (!re.test(link_id) ) {
+        throw "Invalid customURL, customURL only allowed to contain a-z,A-Z,0-9,_,-";
+      }
+     if(isPresnt.length){
+      throw "CustomURL already taken, try another one!!"
+    }
+  }
+     else link_id = nanoid(7);
+    // const link_id = nanoid(7);
+
     // const link_id = "ppp";
 
     console.log(link_id);
@@ -72,7 +85,7 @@ app.post("/v1/shrink", async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    res.status(400).json({ success: !true, ...err });
+    res.status(400).json({ success: !true,err });
   }
 });
 
